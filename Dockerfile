@@ -1,8 +1,11 @@
-# Usar la imagen oficial de PHP con Apache
+# 1. Imagen base
 FROM php:8.2-apache
 
-# Copiar los archivos de tu proyecto a la carpeta pública del servidor
+# 2. INSTALAR LA EXTENSIÓN MYSQLI (¡Esta es la línea que te falta!)
+RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+
+# 3. Copiar tus archivos
 COPY . /var/www/html/
 
-# Decirle a Docker qué puerto vamos a usar (Render usa el 80 por defecto en estos casos)
+# 4. Exponer puerto
 EXPOSE 80
