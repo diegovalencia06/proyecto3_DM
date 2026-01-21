@@ -1,17 +1,33 @@
-<?php 
+<?php
 
 function connection() {
 
-    $conn = new mysqli(getenv('DB_HOST'), getenv('DB_USERNAME'), getenv('DB_PASSWORD'), getenv('DB_DATABASE'), getenv('DB_PORT'));
+    $host = getenv('DB_HOST');
+    $user = getenv('DB_USER');
+    $pass = getenv('DB_PASSWORD');
+    $db   = getenv('DB_NAME');
+    $port = getenv('DB_PORT');
 
-    if($conn->connect_errno) {
+    $mysqli = mysqli_init();
 
-        echo "Error de conexión: " . $conn->connect_errno;
+    if (!$mysqli) {
+        die("Falló mysqli_init");
+    }
 
+    $mysqli->ssl_set(NULL, NULL, NULL, NULL, NULL);
+
+    $conectado = $mysqli->real_connect($host, $user, $pass, $db, (int)$port, NULL, MYSQLI_CLIENT_SSL);
+
+    if (!$conectado) {
+
+        die("Error de conexión ('Connect Error'): " . mysqli_connect_error());
+    
     } else {
 
-        echo "Conexión correcta";
+        echo "La conexión es segura";
 
     }
 
+    return $mysqli;
 }
+?>

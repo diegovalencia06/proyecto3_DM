@@ -1,11 +1,12 @@
-# 1. Imagen base
 FROM php:8.2-apache
 
-# 2. INSTALAR LA EXTENSIÓN MYSQLI (¡Esta es la línea que te falta!)
-RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
+# 1. Actualizar linux e instalar mysqli
+RUN apt-get update && apt-get install -y \
+    && docker-php-ext-install mysqli pdo pdo_mysql \
+    && docker-php-ext-enable mysqli
 
-# 3. Copiar tus archivos
+# 2. Copiar tu proyecto
 COPY . /var/www/html/
 
-# 4. Exponer puerto
+# 3. Exponer el puerto
 EXPOSE 80
