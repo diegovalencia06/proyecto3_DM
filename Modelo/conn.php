@@ -11,7 +11,7 @@ function connection() {
 
     // 1. OBTENER VARIABLES
     $host = getVar('DB_HOST');
-    $user = getVar('DB_USER'); // Aquí es donde estaba fallando
+    $user = getVar('DB_USERNAME'); // Aquí es donde estaba fallando
     $pass = getVar('DB_PASSWORD');
     $db   = getVar('DB_NAME');
     $port = getVar('DB_PORT');
