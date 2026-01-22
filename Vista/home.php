@@ -7,6 +7,6 @@
 </head>
 <body>
     <h1>Prueba</h1>
-    <p><?php echo $conn ?></p>
+    <p><?php echo connection() ?></p>
 </body>
 </html>
