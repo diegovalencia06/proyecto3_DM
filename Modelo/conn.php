@@ -17,8 +17,6 @@ function connection() {
     if ($mysqli_conexion->connect_errno) {
         echo "Error de conexión: " . $mysqli_conexion->connect_errno;
         exit(); 
-    } else {
-        echo "Hemos podido conectarnos con MySQL";
     }
 
     return $mysqli_conexion;

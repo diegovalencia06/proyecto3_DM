@@ -1,3 +1,3 @@
 <?php 
 
-header("Location: ./Controlador/home.php");
+header("Location: ./Controlador/login.php");
