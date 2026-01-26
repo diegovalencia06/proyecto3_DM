@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Registro</title>
-    <link rel="stylesheet" href="../css/register.css">
+    <link rel="stylesheet" href="../css/auth.css">
+
+    <link rel="icon" href="../img/logo_header.png">
 </head>
 <body>
     <div class="main">
@@ -17,6 +19,7 @@
             </ul>
         </div>
         <div class="form-register">
+            <img src="../img/logo.png" alt="">
             <div class="form-container">
                 <h2>Regístrate</h2>
                 <form method="post" action="../Controlador/register.php">
@@ -28,9 +31,7 @@
                     <button type="submit" name="register">Registrarse</button>
                 </form>
                 <p>¿Ya tienes una cuenta? <a href="../Controlador/login.php" style="color: green;">Inicia sesión</a></p>
-                <div class="error">
-                    <?php echo $_SESSION['error'] ?? '' ?>
-                </div>
+                <div class="error"><?php echo $_SESSION['error'] ?? '' ?></div>
             </div>
         </div>
     </div>

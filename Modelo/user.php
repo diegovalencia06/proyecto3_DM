@@ -61,8 +61,8 @@ class user {
 
         $password = password_hash($data['password'], PASSWORD_DEFAULT); 
 
-        $phone    = $data['phone'] ?? null; 
-        $fecha      = $data['fecha_nacimiento'] ?? null;
+        $phone    = $data['telefono'] ?? null; 
+        $fecha      = $data['date'] ?? null;
 
         $stmt = $this->db->prepare("INSERT INTO users (username, password, email, telefono, fecha_nacimiento) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("sssss", $username, $password, $email, $phone, $fecha);

@@ -21,6 +21,8 @@ if (!isset($_POST['register'])) {
 } else {
 
         $username = trim($_POST['username']);
+        $email = trim($_POST['email']);
+
 
         if ($user->emailExists($email)) { 
     
