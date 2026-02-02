@@ -4,8 +4,28 @@
   margin: 0;
   padding: 0;
   font-family: "Lato", sans-serif;
-  color: #fff;
   box-sizing: border-box;
+}
+
+:root {
+  --color-fondo: #ffffff;
+  --color-texto: #333333;
+  --color-borde: #ccc; /* Para los bordes de los inputs o separadores */
+}
+
+/* MODO OSCURO (Se activa con JS) */
+body.dark-mode {
+  --color-fondo: #121212;
+  --color-texto: #e0e0e0;
+  --color-borde: #444;
+}
+
+body {
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .main {
@@ -79,8 +99,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #121212;
   text-align: center;
+  background-color: var(--color-fondo);
+  transition: background-color 0.3s ease;
 }
 
 .form-register input,
@@ -92,6 +113,7 @@
   margin: 5px;
   float: right;
   color: black;
+  background-color: white;
 }
 
 .form-container form {
@@ -99,8 +121,9 @@
   align-items: center;
   flex-direction: column;
   margin: 15px 15px;
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid #fff;
+  border-top: 1px solid var(--color-texto);
+  border-bottom: 1px solid var(--color-texto);
+  transition: border-color 0.3s ease;
 }
 
 form div {
@@ -114,6 +137,7 @@ button {
   border-radius: 20px;
   border: none;
   font-size: large;
+  color: white;
 }
 
 button:hover {
@@ -145,4 +169,30 @@ button:hover {
 
 .form-container {
   padding-top: 20px;
+}
+
+#btn-tema {
+  /* --- LO IMPORTANTE PARA POSICIONAR --- */
+  position: fixed; /* Se fija a la ventana del navegador */
+  bottom: 20px; /* Separación desde abajo */
+  right: 20px; /* Separación desde la derecha */
+  z-index: 1000; /* Se asegura de estar encima de todo lo demás */
+
+  /* --- ESTÉTICA (Para que se vea bonito) --- */
+  background-color: green; /* Tu color verde favorito */
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 50px; /* Bordes muy redondos */
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra para que parezca que flota */
+  transition: transform 0.3s ease;
+}
+
+/* Efecto al pasar el mouse */
+#btn-tema:hover {
+  transform: scale(1.1); /* Se hace un poquito más grande */
+  background-color: #005014;
 }
