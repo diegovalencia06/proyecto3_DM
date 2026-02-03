@@ -32,7 +32,7 @@ class Mailer {
             
             $mail->CharSet = 'UTF-8';
 
-            $mail->setFrom(SMTP_FROM_EMAIL, SMTP_FROM_NAME);
+            $mail->setFrom(SMTP_FROM_EMAIL, 'NomadNet');
             $mail->addAddress($destinatario, $nombreUsuario);
 
             $mail->isHTML(true);                           

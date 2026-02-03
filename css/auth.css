@@ -169,6 +169,7 @@ button:hover {
 
 .form-container {
   padding-top: 20px;
+  align-items: center;
 }
 
 #btn-tema {
@@ -208,41 +209,41 @@ input[type="file"] {
     width: 200px;
 }
 
-/* 2. Estilo ESPECÍFICO del botón "Seleccionar archivo" */
+
 input[type="file"]::file-selector-button {
-    background-color: green; /* Tu color corporativo */
+    background-color: green; 
     color: white;
     border: none;
-    padding: 8px 12px;     /* Hacemos el botón más pequeño y manejable */
+    padding: 8px 12px;     
     border-radius: 5px;
-    margin-right: 10px;    /* Separa el botón del texto del archivo */
+    margin-right: 10px;    
     cursor: pointer;
     font-weight: bold;
-    font-size: 13px;       /* Texto del botón más pequeño */
+    font-size: 13px;       
     transition: background-color 0.3s;
 }
 
-/* 3. Efecto hover para el botón */
 input[type="file"]::file-selector-button:hover {
-    background-color: #005014; /* Verde más oscuro al pasar el ratón */
+    background-color: #005014; 
 }
 
 .googleauth {
 display: flex;
 align-items: center;
 justify-content: center;
-background-color: white;
-color: #757575;
+background-color: var(--color-texto);
+color: var(--color-fondo);
 border: 1px solid #ddd;
 border-radius: 4px;
 padding: 10px;
 text-decoration: none;
-font-family: Arial, sans-serif;
 font-weight: 500;
 box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 width: 100%;
 box-sizing: border-box;
 padding-bottom: 10px;
+width: 70%; 
+margin: 0 auto;     
 }
 
 .change_auth {

@@ -1,5 +1,4 @@
-Modelo/config_mail.php
-Modelo/config_google.php
+Modelo/secret.php
 vendor/
 .git
 .env
