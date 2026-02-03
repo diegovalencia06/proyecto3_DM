@@ -30,6 +30,7 @@ if ($userData && password_verify($password, $userData['password'])) {
 
     $_SESSION['user_id'] = $userData['id'];
     $_SESSION['username'] = $userData['username'];
+    $_SESSION['fotografia'] = $userData['fotografia'];
     
     header("Location: ../Controlador/home.php");
     exit;

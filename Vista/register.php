@@ -22,12 +22,13 @@
             <img src="../img/logo.png" alt="">
             <div class="form-container">
                 <h2>Regístrate</h2>
-                <form method="post" action="../Controlador/register.php">
+                <form method="post" action="../Controlador/register.php" enctype="multipart/form-data">
                     <div class="register-username">Nombre de usuario: <input name="username"></div>
                     <div class="register-email">Correo electrónico: <input name="email" type="email"></div>
                     <div class="register-password">Contraseña: <input name="password" type="password"></div>
                     <div class="register-telefono">Número de teléfono: <input name="telefono" type="tel"></div>
                     <div class="register-fecha">Fecha de nacimiento: <input name="date" type="date"></div>
+                    <div class="register-fecha">Foto de perfil:<input type="file" name="foto_perfil" accept="image/png, image/jpeg, image/jpg"></div>
                     <button type="submit" name="register">Registrarse</button>
                 </form>
                 <p>¿Ya tienes una cuenta? <a href="../Controlador/login.php" style="color: green;">Inicia sesión</a></p>

@@ -19,9 +19,29 @@
             <li><a href="#" class="btn-formviaje">¡Añade tu viaje!</a></li>
         </ul>
 
-        <div>Bienvenido, <a style="color: green;" href="../Controlador/user.php"><?php echo $_SESSION['username']?></a>
+        <div class="user-container">
 
-        <p><a style="color: green;" href="../Controlador/logout.php">Cerrar sesión</a></p></div>
+        <?php 
+            $foto = $_SESSION['fotografia'] ?? 'default_user.png'; 
+            
+            if (strpos($foto, 'http') === 0) {
+
+                $ruta_imagen = $foto;
+
+            } else {
+                
+                $ruta_imagen = "../img/usuarios/" . $foto;
+
+            }
+        ?>
+
+            <img src="<?php echo $ruta_imagen; ?>" alt="Perfil" class="foto-perfil">
+
+            <div>
+                Bienvenido, <a style="color: green;" href="../Controlador/user.php"><?php echo $_SESSION['username']?></a>
+                <p><a style="color: green;" href="../Controlador/logout.php">Cerrar sesión</a></p>
+            </div>
+        </div>
     </nav>
     <div><button id="btn-tema">🌙</button></div>
     <script src="../js/tema.js"></script>

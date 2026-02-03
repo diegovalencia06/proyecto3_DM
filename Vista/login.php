@@ -27,6 +27,26 @@
                     <button type="submit" name="login">Iniciar sesión</button>
                     <div class="error"><?php echo $_SESSION['error'] ?? '' ?></div>
                 </form>
+                <a href="../Controlador/google_callback.php" style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: white;
+                    color: #757575;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    padding: 10px;
+                    text-decoration: none;
+                    font-family: Arial, sans-serif;
+                    font-weight: 500;
+                    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+                    width: 100%;
+                    box-sizing: border-box;">
+                    
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" 
+                         style="width: 18px; height: 18px; margin-right: 10px;" alt="G">
+                    Continuar con Google
+                </a>
                 <p>¿Todavía no tienes cuenta? <a href="../Controlador/register.php" style="color: green;">Regístrate</a></p>
                 
             </div>

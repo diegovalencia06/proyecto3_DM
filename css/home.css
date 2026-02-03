@@ -141,3 +141,26 @@ body {
   transform: scale(1.1);
   background-color: #005014;
 }
+
+.user-container {
+  display: flex;
+  align-items: center; /* Centra verticalmente foto y texto */
+  gap: 12px;           /* Espacio entre la foto y el texto */
+  margin-left: 20px;   /* Separa un poco del menú de navegación */
+}
+
+.foto-perfil {
+  width: 45px;         /* Tamaño de la foto */
+  height: 45px;        /* Cuadrado perfecto */
+  border-radius: 50%;  /* La vuelve redonda */
+  object-fit: cover;   /* IMPORTANTE: Evita que la foto se deforme */
+  border: 2px solid green; /* Borde verde a juego con tu tema */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Un pequeño efecto visual al pasar el ratón por la foto */
+.foto-perfil:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 128, 0, 0.5);
+  cursor: pointer;
+}
