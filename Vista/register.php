@@ -28,12 +28,19 @@
                     <div class="register-password">Contraseña: <input name="password" type="password"></div>
                     <div class="register-telefono">Número de teléfono: <input name="telefono" type="tel"></div>
                     <div class="register-fecha">Fecha de nacimiento: <input name="date" type="date"></div>
-                    <div class="register-fecha">Foto de perfil:<input type="file" name="foto_perfil" accept="image/png, image/jpeg, image/jpg"></div>
+                    <div class="register-foto">Foto de perfil:<input type="file" name="foto_perfil" accept="image/png, image/jpeg, image/jpg"></div>
                     <button type="submit" name="register">Registrarse</button>
                 </form>
-                <p>¿Ya tienes una cuenta? <a href="../Controlador/login.php" style="color: green;">Inicia sesión</a></p>
+                <a href="../Controlador/google_callback.php" class="googleauth">
+                    
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" 
+                         style="width: 18px; height: 18px; margin-right: 10px;" alt="G">
+                    Continuar con Google
+                </a>
+                <p class="change_auth">¿Ya tienes una cuenta? <a href="../Controlador/login.php" style="color: green;">Inicia sesión</a></p>
                 <div class="error"><?php echo $_SESSION['error'] ?? '' ?></div>
             </div>
+            
         </div>
     </div>
         <div><button id="btn-tema">🌙</button></div>
