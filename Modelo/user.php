@@ -74,7 +74,6 @@ class user {
         return $result;
     }
 
-    // 1. Buscar si existe el usuario por su Google ID
     public function getUserByGoogleId($google_id) {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE google_id = ?");
         $stmt->bind_param("s", $google_id);
@@ -84,10 +83,9 @@ class user {
         $user = $result->fetch_assoc();
         
         $stmt->close();
-        return $user; // Devuelve el array de datos o NULL si no existe
+        return $user; 
     }
 
-    // 2. Vincular el Google ID a un email que ya existía
     public function updateGoogleId($email, $google_id) {
         $stmt = $this->db->prepare("UPDATE users SET google_id = ? WHERE email = ?");
         $stmt->bind_param("ss", $google_id, $email);
@@ -98,21 +96,16 @@ class user {
         return $result;
     }
 
-    // 3. Registrar un usuario nuevo que viene de Google
     public function addUserGoogle($data) {
         $username = $data['username'];
         $email = $data['email'];
         $fotografia = $data['fotografia'];
         $google_id = $data['google_id'];
         
-        // Dejamos la contraseña vacía o nula, ya que entra con Google
         $password = ''; 
         
-        // OJO: He añadido 'google_id' al final de la consulta.
-        // Asegúrate de que los campos coinciden con tu base de datos.
         $stmt = $this->db->prepare("INSERT INTO users (username, email, password, fotografia, google_id) VALUES (?, ?, ?, ?, ?)");
         
-        // "sssss" significa que los 5 parámetros son Strings
         $stmt->bind_param("sssss", $username, $email, $password, $fotografia, $google_id);
         
         $result = $stmt->execute();
