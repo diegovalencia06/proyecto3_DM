@@ -8,4 +8,9 @@ session_start();
 
 require_once "../Modelo/user.php";
 
+if (!isset($_SESSION['username'])) {
+    header("Location: ../index.php"); 
+    exit();
+}
+
     include "../Vista/home.php";

@@ -1,8 +1,10 @@
 <?php
+session_start();
 
-session_abort();
+$_SESSION = array(); 
 
-unset($_SESSION['username']);
+session_destroy();
 
 header("Location: ../index.php");
 exit;
+?>

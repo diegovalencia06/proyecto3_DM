@@ -11,7 +11,7 @@ class user {
     }
 
     function getUserByUsername($username) {
-        $sql = "SELECT id, username, password, fotografia FROM users WHERE username = ?";
+        $sql = "SELECT * FROM users WHERE username = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->bind_param("s", $username);
         $stmt->execute();

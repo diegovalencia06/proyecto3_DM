@@ -1,0 +1,76 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+.perfil-card {
+  background: white;
+  width: 100%;
+  max-width: 350px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  padding-bottom: 20px;
+}
+.cabecera {
+  background-color: #4a90e2;
+  height: 100px;
+  margin-bottom: 50px;
+  position: relative;
+}
+.img-container {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.foto-usuario {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid white;
+  background-color: white;
+}
+h2 {
+  margin: 0;
+  color: #333;
+}
+.info-item {
+  margin: 10px 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+.acciones {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 40px;
+}
+.btn {
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+.btn-editar {
+  background-color: #4a90e2;
+  color: white;
+}
+.btn-logout {
+  background-color: #fff;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}
+.btn-volver {
+  color: #888;
+  font-size: 0.9em;
+  margin-top: 10px;
+  display: inline-block;
+}

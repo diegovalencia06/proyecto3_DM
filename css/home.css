@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Forum&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 
+/* ================= RESET Y BASES ================= */
 * {
   margin: 0;
   padding: 0;
@@ -10,10 +11,11 @@
 :root {
   --color-fondo: #ffffff;
   --color-texto: #333333;
-
   --bg-navbar: #f4f4f4;
   --color-navbar-texto: #333333;
   --hover-navbar: rgba(0, 0, 0, 0.1);
+  --verde-corp: #008000; /* Green */
+  --rojo-logout: #dc3545;
 }
 
 body.dark-mode {
@@ -32,6 +34,7 @@ body {
     color 0.3s ease;
 }
 
+/* ================= LOGO ANIMADO ================= */
 .logo-animado {
   font-weight: bold;
   font-size: 30px;
@@ -49,6 +52,7 @@ body {
   background-clip: text;
   color: transparent;
   animation: textoFluido 9s ease infinite;
+  text-decoration: none;
 }
 
 @keyframes textoFluido {
@@ -63,6 +67,7 @@ body {
   }
 }
 
+/* ================= NAVBAR ================= */
 .navbar {
   background-color: var(--bg-navbar);
   color: var(--color-navbar-texto);
@@ -74,15 +79,6 @@ body {
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
-}
-
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--color-navbar-texto);
 }
 
 .nav-links {
@@ -97,7 +93,6 @@ body {
   font-size: 16px;
   padding: 8px 12px;
   border-radius: 4px;
-  transition: background-color 0.3s ease;
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
@@ -105,11 +100,11 @@ body {
 
 .nav-links a:hover {
   background-color: var(--hover-navbar);
-  color: green;
+  color: var(--verde-corp);
 }
 
 .btn-formviaje {
-  background-color: green;
+  background-color: var(--verde-corp);
   color: #fff !important;
   font-weight: bold;
 }
@@ -119,13 +114,38 @@ body {
   color: #fff !important;
 }
 
+/* ================= USUARIO NAVBAR ================= */
+.user-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: 20px;
+}
+
+.foto-perfil {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--verde-corp);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.foto-perfil:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 128, 0, 0.5);
+  cursor: pointer;
+}
+
+/* ================= BOTÓN TEMA ================= */
 #btn-tema {
   position: fixed;
   bottom: 20px;
   right: 20px;
   z-index: 1000;
-
-  background-color: green;
+  background-color: var(--verde-corp);
   color: white;
   border: none;
   padding: 15px 20px;
@@ -142,25 +162,113 @@ body {
   background-color: #005014;
 }
 
-.user-container {
+/* ================= TARJETA DE PERFIL (VISTA PERFIL) ================= */
+.main-content {
   display: flex;
-  align-items: center; /* Centra verticalmente foto y texto */
-  gap: 12px;           /* Espacio entre la foto y el texto */
-  margin-left: 20px;   /* Separa un poco del menú de navegación */
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 20px;
 }
 
-.foto-perfil {
-  width: 45px;         /* Tamaño de la foto */
-  height: 45px;        /* Cuadrado perfecto */
-  border-radius: 50%;  /* La vuelve redonda */
-  object-fit: cover;   /* IMPORTANTE: Evita que la foto se deforme */
-  border: 2px solid green; /* Borde verde a juego con tu tema */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.perfil-card {
+  background-color: var(--bg-navbar);
+  color: var(--color-texto);
+  width: 100%;
+  max-width: 400px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  padding: 40px 20px;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
-/* Un pequeño efecto visual al pasar el ratón por la foto */
-.foto-perfil:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(0, 128, 0, 0.5);
-  cursor: pointer;
+.foto-grande {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--verde-corp);
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.perfil-card h2 {
+  font-family: "Forum", serif;
+  font-size: 2rem;
+  margin-bottom: 5px;
+  color: var(--color-texto);
+}
+
+.rol-badge {
+  display: inline-block;
+  background-color: var(--verde-corp);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.datos-lista {
+  list-style: none;
+  padding: 0 20px;
+  text-align: left;
+  margin: 20px 0;
+}
+
+.datos-lista li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--hover-navbar);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+}
+
+.datos-lista li:last-child {
+  border-bottom: none;
+}
+
+.icono {
+  width: 25px;
+  text-align: center;
+  display: inline-block;
+}
+
+/* Botones de acción perfil */
+.btn-accion {
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: transform 0.2s;
+}
+
+.btn-editar {
+  background-color: var(--verde-corp);
+  color: white !important;
+  margin-right: 10px;
+}
+
+.btn-logout-card {
+  background-color: transparent;
+  border: 2px solid var(--rojo-logout);
+  color: var(--rojo-logout) !important;
+}
+
+.btn-accion:hover {
+  transform: scale(1.05);
+}
+
+.btn-logout-card:hover {
+  background-color: var(--rojo-logout);
+  color: white !important;
 }
