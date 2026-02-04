@@ -28,7 +28,7 @@ class Mailer {
             $mail->Username   = SMTP_USER; 
             $mail->Password   = SMTP_PASS; 
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = 587;
+            $mail->Port       = 2525;
             
             $mail->CharSet = 'UTF-8';
 
