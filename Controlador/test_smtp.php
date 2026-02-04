@@ -1,96 +1,68 @@
 <?php
 // Controlador/test_smtp.php
 
-// 1. Configuración básica para ver errores en pantalla
+// Forzamos salida inmediata para ver el progreso y evitar pantalla blanca
 ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+ini_set('output_buffering', 'off');
+ini_set('zlib.output_compression', false);
+while (@ob_end_flush());
+ini_set('implicit_flush', true);
+ob_implicit_flush(true);
+
+echo "<h1>🕵️ Diagnóstico SMTP (Versión Corregida)</h1>";
 
 require_once '../vendor/autoload.php';
 
-// Intentamos cargar la configuración. 
-// Si falla, el script se detendrá y sabremos que el error es que no encuentra el archivo.
 if (!file_exists('../Modelo/config_mail.php')) {
-    die("❌ ERROR CRÍTICO: No encuentro el archivo '../Modelo/config_mail.php'.");
+    die("❌ Error: No encuentro config_mail.php");
 }
 require_once '../Modelo/config_mail.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-echo "<h1>🕵️ Diagnóstico de Correo (SMTP)</h1>";
-
-// -----------------------------------------------------
-// PARTE 1: VERIFICAR VARIABLES (Lo que lee Render)
-// -----------------------------------------------------
-echo "<h3>1. Verificando configuración...</h3>";
-
-echo "<ul>";
-echo "<li><b>HOST:</b> " . (defined('SMTP_HOST') ? SMTP_HOST : '❌ NO DEFINIDO') . "</li>";
-echo "<li><b>USER:</b> " . (defined('SMTP_USER') ? SMTP_USER : '❌ NO DEFINIDO') . "</li>";
-echo "<li><b>PORT:</b> 587 (Forzado manualmente)</li>";
-
-// Verificamos la contraseña sin mostrarla entera
-if (defined('SMTP_PASS') && !empty(SMTP_PASS)) {
-    $pass = SMTP_PASS;
-    $len = strlen($pass);
-    $inicio = substr($pass, 0, 3);
-    echo "<li><b>PASS:</b> ✅ Detectada ($len caracteres). Empieza por: <code>$inicio...</code></li>";
-} else {
-    echo "<li style='color:red'><b>PASS:</b> ❌ VACÍA O NO DEFINIDA. Revisa las variables de entorno en Render.</li>";
-}
-echo "</ul>";
-
-// -----------------------------------------------------
-// PARTE 2: INTENTO DE CONEXIÓN
-// -----------------------------------------------------
-echo "<h3>2. Intentando conectar con Brevo...</h3>";
-echo "<div style='background: #f4f4f4; padding: 10px; border: 1px solid #ddd; font-family: monospace;'>";
+echo "<p>✅ Librerías cargadas. Iniciando...</p>";
+flush(); 
 
 $mail = new PHPMailer(true);
 
 try {
-    // Configuración de Debug (Muestra todo lo que pasa)
-    $mail->SMTPDebug = 2; // 2 = Muestra mensajes de cliente y servidor
-    $mail->Debugoutput = 'html'; // Formato HTML para que se lea bien en la web
+    // DEBUG NIVEL MÁXIMO
+    $mail->SMTPDebug = 2; 
+    $mail->Debugoutput = function($str, $level) {
+        echo "<div style='font-size:12px; color:#555; border-bottom:1px solid #eee;'>Debug: $str</div>";
+        flush(); 
+    };
 
     $mail->isSMTP();
-    $mail->Host       = SMTP_HOST; 
+    
+    // --- CONFIGURACIÓN CRÍTICA ---
+    $mail->Timeout  = 8; // Esperamos máximo 8 segundos. Si tarda más, cortamos.
+    
+    $mail->Host       = SMTP_HOST;
     $mail->SMTPAuth   = true;
     $mail->Username   = SMTP_USER;
     $mail->Password   = SMTP_PASS;
-    
-    // Configuración Blindada para Render
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; 
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = 587; 
 
-    // Remitente y Destinatario (Prueba de auto-envío)
-    $mail->setFrom(SMTP_FROM_EMAIL, 'Test Diagnostico');
+    // Remitente y Destinatario
+    $mail->setFrom(SMTP_FROM_EMAIL, 'Test Render');
     $mail->addAddress(SMTP_FROM_EMAIL, 'Yo Mismo'); 
 
-    $mail->isHTML(true);
-    $mail->Subject = 'Test de Diagnostico Render';
-    $mail->Body    = 'Si ves esto, la conexión funciona.';
+    $mail->Subject = 'Test Final';
+    $mail->Body    = 'Si lees esto, funciona.';
 
-    // Intentamos enviar (el log saldrá en pantalla gracias a SMTPDebug)
+    echo "<p>⏳ Conectando a Brevo por puerto 587...</p>";
+    flush();
+
     $mail->send();
-    echo "</div>";
-    echo "<h2 style='color:green'>✅ ¡ÉXITO! El correo ha salido del servidor.</h2>";
+    echo "<h2 style='color:green'>✅ ¡ENVIADO CON ÉXITO!</h2>";
 
 } catch (Exception $e) {
-    echo "</div>"; // Cerramos la caja de logs
-    echo "<h2 style='color:red'>❌ FALLO EN EL ENVÍO</h2>";
-    echo "<p><b>Error reportado:</b> " . $mail->ErrorInfo . "</p>";
-    
-    // Pistas comunes según el error
-    if (strpos($mail->ErrorInfo, 'connect to') !== false) {
-        echo "<p>💡 <b>Pista:</b> Parece un bloqueo de puerto o firewall. ¿Seguro que es el puerto 587?</p>";
-    }
-    if (strpos($mail->ErrorInfo, 'Authentication failed') !== false) {
-        echo "<p>💡 <b>Pista:</b> Tu usuario o contraseña están mal. Revisa la clave maestra en Brevo.</p>";
-    }
-    if (strpos($mail->ErrorInfo, 'Sender not allowed') !== false) {
-        echo "<p>💡 <b>Pista:</b> El correo remitente no está autorizado en Brevo.</p>";
-    }
+    echo "<h2 style='color:red'>❌ ERROR DE ENVÍO:</h2>";
+    echo "<b>Mensaje:</b> " . $e->getMessage() . "<br>";
+    echo "<b>Log técnico:</b> " . $mail->ErrorInfo;
 }
 ?>
