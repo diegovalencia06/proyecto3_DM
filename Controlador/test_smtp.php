@@ -45,7 +45,7 @@ try {
     $mail->Username   = SMTP_USER;
     $mail->Password   = SMTP_PASS;
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port       = 587; 
+    $mail->Port       = 2525; 
 
     // Remitente y Destinatario
     $mail->setFrom(SMTP_FROM_EMAIL, 'Test Render');
